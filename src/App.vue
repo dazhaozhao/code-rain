@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const str = "console.log('hello world')"
+const str = 'console.log(\'hello world\')'
 
 const el = ref<HTMLCanvasElement>()
 
-const init = () => {
+function init() {
   const ctx = el.value!.getContext('2d')!
   el.value!.width = window.innerWidth
   el.value!.height = window.innerHeight
@@ -19,13 +19,14 @@ const init = () => {
     drops.forEach((drop, i) => {
       const text = str[Math.floor(Math.random() * str.length)]
       ctx.fillText(text, i * 14, drop * 14)
-      if (drop * 14 > height && Math.random() > 0.975) drops[i] = 0
+      if (drop * 14 > height && Math.random() > 0.975)
+        drops[i] = 0
       drops[i]++
     })
   }
   return draw
 }
-const resizeCanvas = () => {
+function resizeCanvas() {
   window.addEventListener('resize', () => {
     el.value!.width = window.innerWidth
     el.value!.height = window.innerHeight
@@ -40,6 +41,6 @@ onMounted(() => {
 
 <template>
   <main>
-    <canvas ref="el" class="w-full h-full"></canvas>
+    <canvas ref="el" class="h-full w-full" />
   </main>
 </template>
